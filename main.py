@@ -23,9 +23,10 @@ def main():
                 if event.type == pygame.QUIT:
                     return
         screen.fill((0, 0, 0)) # set the screen colour to black
+        player.update(dt) # calls update method to move player object on keystrokes
         player.draw(screen) # draw the player object in the centre of the screen
         pygame.display.flip() # refresh the screen
-        dt = clock.tick(60) / 1000 #
+        dt = clock.tick(60) / 1000 # limit the framerate to 60 FPS
 
 
 if __name__ == "__main__":
