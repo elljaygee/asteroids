@@ -1,3 +1,4 @@
+import sys
 import pygame
 from constants import *
 from player import Player
@@ -20,7 +21,7 @@ def main():
     AsteroidField.containers = updatable # add AsteroidField to Group
 
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2) # instantiate Player object
-    field = AsteroidField()
+    asteroid_field = AsteroidField() # instantiate asteroid_field object
 
     dt = 0 # set initial deltatime value
 
@@ -33,9 +34,14 @@ def main():
         
         screen.fill((0, 0, 0)) # set the screen colour to black
 
-        for obj in drawable:
-             obj.draw(screen) # iterates over drawable Group objects and draws them
+        for item in drawable:
+             item.draw(screen) # iterates over drawable Group objects and draws them
         
+        for asteroid in asteroids:
+            if asteroid.collision(player):
+                print("GAME OVER!")
+                sys.exit()
+
         pygame.display.flip() # refresh the screen
         
         dt = clock.tick(60) / 1000 # limit the framerate to 60 FPS
