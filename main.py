@@ -1,6 +1,8 @@
 import pygame
 from constants import *
 from player import Player
+from asteroids import Asteroid
+from asteroidfield import AsteroidField
 
 
 def main():
@@ -10,10 +12,15 @@ def main():
 
     updatable = pygame.sprite.Group() # create updatable Group
     drawable = pygame.sprite.Group() # create drawable Group
+    asteroids = pygame.sprite.Group() # create asteroids Group
+    asteroidfield = pygame.sprite.Group()
 
     Player.containers = (updatable, drawable) # add Player to Groups
+    Asteroid.containers = (asteroids, updatable, drawable) # add Asteroid to Groups
+    AsteroidField.containers = updatable # add AsteroidField to Group
 
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2) # instantiate Player object
+    field = AsteroidField()
 
     dt = 0 # set initial deltatime value
 
